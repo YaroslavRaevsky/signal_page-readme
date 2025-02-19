@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Сигнализация</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    .indicator {
+      width: 50px;
+      height: 50px;
+      background-color: red;
+      display: inline-block;
+      margin: 10px;
+    }
+    .button {
+      margin: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Сигнализация</h1>
+  <div id="indicators">
+    <!-- Индикаторы будут добавлены с помощью JavaScript -->
+  </div>
+  <button class="button" onclick="resetIndicators()">Сброс</button>
+
+  <script>
+    // Массив состояний индикаторов
+    let indicatorStates = Array(16).fill(false);
+
+    // Функция для обновления индикаторов
+    function updateIndicators() {
+      const container = document.getElementById('indicators');
+      container.innerHTML = '';
+      indicatorStates.forEach((state, index) => {
+        const indicator = document.createElement('div');
+        indicator.className = 'indicator';
+        indicator.style.backgroundColor = state ? 'green' : 'red';
+        indicator.onclick = () => toggleIndicator(index);
+        container.appendChild(indicator);
+      });
+    }
+
+    // Функция для переключения состояния индикатора
+    function toggleIndicator(index) {
+      indicatorStates[index] = !indicatorStates[index];
+      updateIndicators();
+    }
+
+    // Функция для сброса всех индикаторов
+    function resetIndicators() {
+      indicatorStates.fill(false);
+      updateIndicators();
+    }
+
+    // Инициализация индикаторов при загрузке страницы
+    updateIndicators();
+  </script>
+</body>
+</html>
